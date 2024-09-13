@@ -23,10 +23,36 @@ using namespace std;
 //***************************************************************************
 int hexCharToInt (char hexDigit)
 {
-  return 0;
+  int decVal = 0;
+
+  switch (hexDigit) {
+    case 'A':
+      decVal = 10;
+      break;
+    case 'B':
+      decVal = 11;
+      break;
+     case 'C':
+      decVal = 12;
+      break;
+     case 'D':
+      decVal = 13;
+      break;
+     case 'E':
+      decVal = 14;
+      break;
+     case 'F':
+      decVal = 15;
+      break;
+    default:
+      decVal = hexDigit - '0';
+  }
+
+  return decVal;
 }
 
 //***************************************************************************
+// #2
 // Function:    getBase
 //
 // Description: Returns the base value of the value
@@ -37,10 +63,18 @@ int hexCharToInt (char hexDigit)
 //***************************************************************************
 char getBase (const string &strNumber)
 {
+  /*Input: string representing a decimal, hexadecimal, or binary number
+Returns: one of three characters:
+• D if the number is a decimal
+• H if the user number is a hexadecimal
+• B if the number is binary.*/
+  char baseVal;
+  if 
   return 0;
 }
 
 //***************************************************************************
+// #3
 // Function:    getNumber
 //
 // Description: 
@@ -55,6 +89,7 @@ string getNumber (const string &prompt)
 }
 
 //***************************************************************************
+// #4
 // Function:    printTitle
 //
 // Description: Prints the title
@@ -68,6 +103,95 @@ void printTitle (const string &myTitle)
   cout << myTitle << endl;
 }
 
+//***************************************************************************
+// #5
+// Function:    binaryToDecimal
+//
+// Description: 
+//
+// Parameters:  strNumber - 
+//
+// Returned:    String
+//***************************************************************************
+string binaryToDecimal (const string &strNumber)
+{
+  return 0;
+}
+
+//***************************************************************************
+// #6
+// Function:    decimalToBinary
+//
+// Description: 
+//
+// Parameters:  strNumber - 
+//
+// Returned:    String
+//***************************************************************************
+string decimalToBinary (const string &strNumber)
+{
+  return 0;
+}
+
+//***************************************************************************
+// #7
+// Function:    decimalToHex
+//
+// Description: 
+//
+// Parameters:  strNumber - 
+//
+// Returned:    String
+//***************************************************************************
+string decimalToHex (const string &strNumber)
+{
+  return 0;
+}
+
+//***************************************************************************
+// #8
+// Function:    hexToDecimal
+//
+// Description: 
+//
+// Parameters:  strNumber - 
+//
+// Returned:    String
+//***************************************************************************
+string hexToDecimal (const string &strNumber)
+{
+  return 0;
+}
+
+//***************************************************************************
+// #9
+// Function:    hexToBinary
+//
+// Description: 
+//
+// Parameters:  strNumber - 
+//
+// Returned:    String
+//***************************************************************************
+string hexToBinary (const string &strNumber)
+{
+  return 0;
+}
+
+//***************************************************************************
+// #10
+// Function:    binaryToHex
+//
+// Description: 
+//
+// Parameters:  strNumber - 
+//
+// Returned:    String
+//***************************************************************************
+string binaryToHex (const string &strNumber)
+{
+  return 0;
+}
 
 //***************************************************************************
 // Function:    main
@@ -80,7 +204,9 @@ void printTitle (const string &myTitle)
 //***************************************************************************
 int main () {
 
-  printTitle("Hi");
+  // printTitle("Hi");
+  cout << hexCharToInt ('F') << endl;
+
   
   return EXIT_SUCCESS;
 }
