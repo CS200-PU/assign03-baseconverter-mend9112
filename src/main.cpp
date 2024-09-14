@@ -9,8 +9,14 @@
 //******************************************************************************
 
 #include <iostream>
+#include <cstring>
+#include <cmath>
+#include <algorithm>
 
 using namespace std;
+
+const char* BIN_PREFIX = "0b";
+const char* HEX_PREFIX = "0x";
 
 //***************************************************************************
 // Function:    hexCharToInt
@@ -51,8 +57,38 @@ int hexCharToInt (char hexDigit)
   return decVal;
 }
 
+string intToHexChar (int num)
+{
+  string hex;
+
+  switch (num) {
+    case 10:
+      hex = "A";
+      break;
+    case 11:
+      hex = "B";
+      break;
+     case 12:
+      hex = "C";
+      break;
+     case 13:
+      hex = "D";
+      break;
+     case 14:
+      hex = "E";
+      break;
+     case 15:
+      hex = "F";
+      break;
+    default:
+      hex = to_string(num);
+  }
+
+  return hex;
+}
+
+
 //***************************************************************************
-// #2
 // Function:    getBase
 //
 // Description: Returns the base value of the value
@@ -61,16 +97,28 @@ int hexCharToInt (char hexDigit)
 //
 // Returned:    Base value (D, H, B)
 //***************************************************************************
-char getBase (const string &strNumber)
-{
-  /*Input: string representing a decimal, hexadecimal, or binary number
-Returns: one of three characters:
-• D if the number is a decimal
-• H if the user number is a hexadecimal
-• B if the number is binary.*/
+char getBase (const char *strNumber)
+{ 
   char baseVal;
-  if 
-  return 0;
+  const int PREFIX_LEN = 2;
+
+  int binary = strncmp (BIN_PREFIX, strNumber, PREFIX_LEN);
+  int hex = strncmp (HEX_PREFIX, strNumber, PREFIX_LEN);
+
+  if (0 == binary)
+  {
+    baseVal = 'B';
+  }
+  else if (0 == hex)
+  {
+    baseVal = 'H';
+  }
+  else
+  {
+    baseVal = 'D';
+  }
+
+  return baseVal;
 }
 
 //***************************************************************************
@@ -89,7 +137,6 @@ string getNumber (const string &prompt)
 }
 
 //***************************************************************************
-// #4
 // Function:    printTitle
 //
 // Description: Prints the title
@@ -100,67 +147,116 @@ string getNumber (const string &prompt)
 //***************************************************************************
 void printTitle (const string &myTitle)
 {
-  cout << myTitle << endl;
+  const int LEN = 38;
+  const string STARS = "*****";
+
+  for (int i = 0; i < LEN; i++)
+  {
+    cout << '*';
+  }
+
+  cout << endl << STARS << myTitle  << STARS << endl;
+
+  for (int i = 0; i < LEN; i++)
+  {
+    cout << '*';
+  }
+  cout << endl;
 }
 
 //***************************************************************************
-// #5
 // Function:    binaryToDecimal
 //
-// Description: 
+// Description: Converts a binary value to its equivalent decimal value
 //
-// Parameters:  strNumber - 
+// Parameters:  strNumber - binary number to convert to decimal
 //
-// Returned:    String
+// Returned:    String of decimal value
 //***************************************************************************
 string binaryToDecimal (const string &strNumber)
 {
-  return 0;
+  int len = strNumber.length ();
+  int decSum = 0;
+
+  for (int i = 0; i < len; i++)
+  {
+    decSum += (pow (2, (len - 1) - i)) * (strNumber[i] - '0');
+  }
+
+  return to_string(decSum);
 }
 
 //***************************************************************************
-// #6
 // Function:    decimalToBinary
 //
-// Description: 
+// Description: Converts a decimal value to its equivalent binary value
 //
-// Parameters:  strNumber - 
+// Parameters:  strNumber - decimal number to convert to binary
 //
-// Returned:    String
+// Returned:    String of binary value
 //***************************************************************************
 string decimalToBinary (const string &strNumber)
 {
-  return 0;
+  string bin;
+  int dec = stoi (strNumber);
+
+  do
+  {
+    bin += to_string(dec % 2);
+    dec /= 2;
+  } while (dec > 0);
+  
+  reverse(bin.begin(), bin.end());
+
+  return bin;
 }
 
 //***************************************************************************
 // #7
 // Function:    decimalToHex
 //
-// Description: 
+// Description: Converts a decimal value to its equivalent hex value
 //
-// Parameters:  strNumber - 
+// Parameters:  strNumber - decimal number to convert to hex
 //
-// Returned:    String
+// Returned:    String of hex value
 //***************************************************************************
 string decimalToHex (const string &strNumber)
 {
-  return 0;
+  string hex;
+  int dec = stoi (strNumber);
+
+  do
+  {
+    hex += intToHexChar (dec % 16);
+    dec /= 16;
+  } while (dec > 0);
+  
+  reverse(hex.begin(), hex.end());
+
+  return hex;
 }
 
 //***************************************************************************
-// #8
 // Function:    hexToDecimal
 //
-// Description: 
+// Description: Converts a hex value to its equivalent decimal value
 //
-// Parameters:  strNumber - 
+// Parameters:  strNumber - binary number to convert to decimal
 //
-// Returned:    String
+// Returned:    String of decimal value
 //***************************************************************************
 string hexToDecimal (const string &strNumber)
 {
-  return 0;
+  int len = strNumber.length ();
+  int decSum = 0;
+
+  for (int i = 0; i < len; i++)
+  {
+    decSum += (pow (16, (len - 1) - i)) * hexCharToInt (strNumber[i]);
+  }
+
+  return to_string (decSum);
 }
 
 //***************************************************************************
@@ -175,7 +271,7 @@ string hexToDecimal (const string &strNumber)
 //***************************************************************************
 string hexToBinary (const string &strNumber)
 {
-  return 0;
+  return decimalToBinary (hexToDecimal (strNumber));
 }
 
 //***************************************************************************
@@ -190,7 +286,7 @@ string hexToBinary (const string &strNumber)
 //***************************************************************************
 string binaryToHex (const string &strNumber)
 {
-  return 0;
+  return decimalToHex (binaryToDecimal (strNumber));
 }
 
 //***************************************************************************
@@ -203,10 +299,29 @@ string binaryToHex (const string &strNumber)
 // Returned:    None
 //***************************************************************************
 int main () {
+  const string TITLE = "HEX-DECIMAL-BINARY CONVERTER";
+  
+  string userInput;
 
-  // printTitle("Hi");
-  cout << hexCharToInt ('F') << endl;
+  printTitle(TITLE);
+
+  do {
 
   
+    cout << "Enter your string to convert (q to quit): ";
+    cin >> userInput;
+
+    // getNumber (userInput)
+
+    // decimalToBinary (userInput);
+    // decimalToHex (userInput);
+    // cout << hexToDecimal (userInput) << endl;
+    // cout << binaryToDecimal (userInput) << endl;
+    // cout << hexToBinary (userInput) << endl;
+    cout << binaryToHex (userInput) << endl;
+
+  } while ("q" != userInput);
+  
+
   return EXIT_SUCCESS;
 }
