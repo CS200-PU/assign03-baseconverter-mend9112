@@ -1,11 +1,11 @@
 //******************************************************************************
 // File name:   main.cpp
 // Author:      Marisa Mendosa
-// Date:        09/13/2024 (Replace xx/xx/xxxx with month/day/year)
-// Class:       CS150-xx (Replace xx with your section number)
-// Assignment:  Hello World
-// Purpose:     Display the message Hello World to the screen
-// Hours:       0.25
+// Date:        09/13/2024
+// Class:       CS200 (Replace xx with your section number)
+// Assignment:  Base Converter
+// Purpose:     Convert between hexadecimal, decimal, and binary
+// Hours:       3
 //******************************************************************************
 
 #include <iostream>
