@@ -133,7 +133,7 @@ char getBase (const char *strNumber)
 //***************************************************************************
 // Function:    getNumber
 //
-// Description: 
+// Description: Isolates the number from the inputed value
 //
 // Parameters:  prompt - user inputed value to be converted
 //
