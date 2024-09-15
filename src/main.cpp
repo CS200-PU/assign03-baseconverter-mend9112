@@ -57,6 +57,15 @@ int hexCharToInt (char hexDigit)
   return decVal;
 }
 
+//***************************************************************************
+// Function:    intToHexChar
+//
+// Description: Converts integer value to its hex character
+//
+// Parameters:  num - integer value to be converted
+//
+// Returned:    Equivalent hex character
+//***************************************************************************
 string intToHexChar (int num)
 {
   string hex;
@@ -122,7 +131,6 @@ char getBase (const char *strNumber)
 }
 
 //***************************************************************************
-// #3
 // Function:    getNumber
 //
 // Description: 
@@ -133,7 +141,14 @@ char getBase (const char *strNumber)
 //***************************************************************************
 string getNumber (const string &prompt)
 {
-  return 0;
+  string num = prompt;
+
+  if ('D' != getBase (prompt.c_str()))
+  {
+    num.erase(0, 2);
+  }
+
+  return num;
 }
 
 //***************************************************************************
@@ -212,7 +227,6 @@ string decimalToBinary (const string &strNumber)
 }
 
 //***************************************************************************
-// #7
 // Function:    decimalToHex
 //
 // Description: Converts a decimal value to its equivalent hex value
@@ -260,14 +274,13 @@ string hexToDecimal (const string &strNumber)
 }
 
 //***************************************************************************
-// #9
 // Function:    hexToBinary
 //
-// Description: 
+// Description: Converts a hex value to its equivalent binary value
 //
-// Parameters:  strNumber - 
+// Parameters:  strNumber - hex number to convert to binary
 //
-// Returned:    String
+// Returned:    String of binary value
 //***************************************************************************
 string hexToBinary (const string &strNumber)
 {
@@ -275,14 +288,13 @@ string hexToBinary (const string &strNumber)
 }
 
 //***************************************************************************
-// #10
 // Function:    binaryToHex
 //
-// Description: 
+// Description: Converts a binary value to its equivalent hex value
 //
-// Parameters:  strNumber - 
+// Parameters:  strNumber - binary number to convert to hex
 //
-// Returned:    String
+// Returned:    String of hex value
 //***************************************************************************
 string binaryToHex (const string &strNumber)
 {
@@ -299,28 +311,50 @@ string binaryToHex (const string &strNumber)
 // Returned:    None
 //***************************************************************************
 int main () {
-  const string TITLE = "HEX-DECIMAL-BINARY CONVERTER";
+  const string TITLE = "HEX-DECIMAL-BINARY CONVERTER",
+               DEC_CONV = "The decimal conversion is: ",
+               HEX_CONV = "The hexadecimal conversion is: ",
+               BIN_CONV = "The binary conversion is: ";
+
+  const char DEC = 'D', 
+             HEX = 'H', 
+             BIN = 'B';
   
   string userInput;
+  string num;
+  char base;
 
   printTitle(TITLE);
 
-  do {
+  cout << "Enter your string to convert (q to quit): ";
+  cin >> userInput;
 
-  
+  while ("q" != userInput) 
+  {
+    num = getNumber (userInput);
+    base = getBase (userInput.c_str());
+
+    if (DEC == base)
+    {
+      cout << BIN_CONV << BIN_PREFIX + decimalToBinary (num) << endl;
+      cout << HEX_CONV << HEX_PREFIX + decimalToHex (num) << endl;
+    }
+    else if (HEX == base)
+    {
+      cout << DEC_CONV << hexToDecimal (num) << endl;
+      cout << BIN_CONV << BIN_PREFIX + hexToBinary (num) << endl;
+    }
+    else if (BIN == base)
+    {
+      cout << DEC_CONV << binaryToDecimal (num) << endl;
+      cout << HEX_CONV << HEX_PREFIX + binaryToHex (num) << endl;
+    }
+
+    cout << endl;
+
     cout << "Enter your string to convert (q to quit): ";
     cin >> userInput;
-
-    // getNumber (userInput)
-
-    // decimalToBinary (userInput);
-    // decimalToHex (userInput);
-    // cout << hexToDecimal (userInput) << endl;
-    // cout << binaryToDecimal (userInput) << endl;
-    // cout << hexToBinary (userInput) << endl;
-    cout << binaryToHex (userInput) << endl;
-
-  } while ("q" != userInput);
+  }
   
 
   return EXIT_SUCCESS;

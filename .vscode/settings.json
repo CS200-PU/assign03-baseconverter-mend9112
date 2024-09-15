@@ -20,6 +20,10 @@
     "iostream": "cpp",
     "functional": "cpp",
     "ostream": "cpp",
-    "cmath": "cpp"
+    "cmath": "cpp",
+    "string": "cpp",
+    "deque": "cpp",
+    "unordered_map": "cpp",
+    "vector": "cpp"
   },
 }
